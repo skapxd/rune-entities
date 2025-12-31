@@ -3,7 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://c6r8x4y2z3w1" path="res://scenes/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://d6r8x4y2z3w1" path="res://scenes/enemy.tscn" id="2_enemy"]
 
+[ext_resource type="PackedScene" uid="uid://b7r8x4y2z3w1" path="res://scenes/player_profile/player_profile.tscn" id="3_hud"]
+
 [node name="Main" type="Node2D"]
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1

@@ -1,11 +1,32 @@
 extends RuneEntity
 
+signal health_changed(current, max_val)
+signal mana_changed(current, max_val)
+
+@export var max_mana: float = 100.0
+var current_mana: float
+
 func _ready():
 	super._ready()
+	current_mana = max_mana
 	entity_name = "Player"
 	shape_type = ShapeType.HEXAGON
-	element = Element.NONE # Player is neutral or omni-elemental
-	base_color = Color(0.2, 0.8, 1.0) # Cyan brilliance
+	element = Element.NONE 
+	base_color = Color(0.2, 0.8, 1.0)
+	
+	# Emitir valores iniciales
+	health_changed.emit(current_health, max_health)
+	mana_changed.emit(current_mana, max_mana)
+
+func _process(delta):
+	# Regeneración pasiva de maná
+	if current_mana < max_mana:
+		current_mana = min(max_mana, current_mana + 5.0 * delta)
+		mana_changed.emit(current_mana, max_mana)
+
+func take_damage(amount: float, attacker_element: Element = Element.NONE):
+	super.take_damage(amount, attacker_element)
+	health_changed.emit(current_health, max_health)
 
 func _physics_process(_delta):
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

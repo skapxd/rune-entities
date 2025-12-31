@@ -19,7 +19,7 @@ func start(shape_type: int, color: Color, radius: float, points: PackedVector2Ar
 		# Animación de explosión
 		var target_pos = Vector2(randf_range(-100, 100), randf_range(-100, 100))
 		var tween = create_tween().set_parallel(true)
-		tween.tween_property(fragment, "position", target_pos, 0.5).set_trans(Tween.TRANS_OUT).set_ease(Tween.EASE_QUAD)
+		tween.tween_property(fragment, "position", target_pos, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(fragment, "rotation", randf_range(-PI, PI), 0.5)
 		tween.tween_property(fragment, "modulate:a", 0.0, 0.5)
 		
