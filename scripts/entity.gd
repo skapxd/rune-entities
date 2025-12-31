@@ -66,6 +66,12 @@ func get_element_multiplier(atk: Element, def: Element) -> float:
 	return 1.0
 
 func die():
+	var particles = Node2D.new()
+	get_parent().add_child(particles)
+	particles.global_position = global_position
+	particles.set_script(load("res://scripts/death_particles.gd"))
+	particles.start(shape_type, get_element_color(element) if element != Element.NONE else base_color, 30.0, get_poly_points(6, 30.0))
+	
 	queue_free()
 
 func get_element_color(type: Element) -> Color:
