@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://e6r8x4y203w1"]
+
+[ext_resource type="PackedScene" uid="uid://c6r8x4y2z3w1" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://d6r8x4y2z3w1" path="res://scenes/enemy.tscn" id="2_enemy"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.08, 0.12, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(576, 324)
+
+[node name="Enemy_Fire" parent="." instance=ExtResource("2_enemy")]
+position = Vector2(200, 200)
+element = 0
+shape_type = 1
+
+[node name="Enemy_Water" parent="." instance=ExtResource("2_enemy")]
+position = Vector2(900, 200)
+element = 1
+shape_type = 3
+
+[node name="Enemy_Earth" parent="." instance=ExtResource("2_enemy")]
+position = Vector2(200, 500)
+element = 3
+shape_type = 2
+speed = 80.0
+
+[node name="Enemy_Wind" parent="." instance=ExtResource("2_enemy")]
+position = Vector2(900, 500)
+element = 2
+shape_type = 1
+speed = 250.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
