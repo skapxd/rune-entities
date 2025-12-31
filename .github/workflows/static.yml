@@ -43,6 +43,17 @@ jobs:
           mv templates/* ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable/
           rm -f Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
 
+      - name: Force Hybrid Fullscreen for Export
+        run: |
+          echo "" >> project.godot
+          echo "[display]" >> project.godot
+          # Modo 3 (Fullscreen) para la Web
+          echo "window/size/mode.web=3" >> project.godot
+          # Modo 4 (Exclusive Fullscreen) para Desktop (Windows, macOS, Linux)
+          echo "window/size/mode.windows=4" >> project.godot
+          echo "window/size/mode.macos=4" >> project.godot
+          echo "window/size/mode.linuxbsd=4" >> project.godot
+
       - name: Web Build
         run: |
           mkdir -p build/web
